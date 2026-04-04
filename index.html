@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>اتاق 704</title>
+
+<style>
+
+/* ================= RESET ================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:tahoma;
+}
+
+body{
+background:#111;
+color:#fff;
+}
+
+/* ================= HEADER ================= */
+
+header{
+background:#b30000;
+padding:15px;
+text-align:center;
+font-size:22px;
+}
+
+/* ================= SLIDER ================= */
+
+.slider{
+display:flex;
+overflow-x:auto;
+gap:15px;
+padding:20px;
+scroll-snap-type:x mandatory;
+}
+
+.slider a{
+scroll-snap-align:center;
+}
+
+.slider img{
+height:220px;
+border-radius:12px;
+transition:.3s;
+}
+
+.slider img:hover{
+transform:scale(1.05);
+}
+
+/* ================= LIGHTBOX ================= */
+
+.lightbox{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.95);
+display:flex;
+justify-content:center;
+align-items:center;
+opacity:0;
+pointer-events:none;
+transition:.4s;
+z-index:999;
+}
+
+.lightbox:target{
+opacity:1;
+pointer-events:auto;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:80%;
+border-radius:10px;
+}
+
+/* ================= NAV BUTTON ================= */
+
+.nav{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:40px;
+color:white;
+text-decoration:none;
+padding:20px;
+}
+
+.prev{left:10px;}
+.next{right:10px;}
+
+.close{
+position:absolute;
+top:25px;
+right:35px;
+font-size:40px;
+color:white;
+text-decoration:none;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+.slider img{
+height:150px;
+}
+
+.nav{
+font-size:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+اتاق 704 - Hotel Gallery
+</header>
+
+<!-- ================= SLIDER ================= -->
+
+<div class="slider">
+
+<a href="#p1"><img src="images/704 (1).jpg"></a>
+<a href="#p2"><img src="images/704 (2).jpg"></a>
+<a href="#p3"><img src="images/704 (3).jpg"></a>
+<a href="#p4"><img src="images/704 (4).jpg"></a>
+<a href="#p5"><img src="images/704 (5).jpg"></a>
+
+</div>
+
+<!-- ================= LIGHTBOX ================= -->
+
+<div id="p1" class="lightbox">
+<a href="#" class="close">×</a>
+<a href="#p5" class="nav prev">❮</a>
+<img src="images/704 (1).jpg">
+<a href="#p2" class="nav next">❯</a>
+</div>
+
+<div id="p2" class="lightbox">
+<a href="#" class="close">×</a>
+<a href="#p1" class="nav prev">❮</a>
+<img src="images/704 (2).jpg">
+<a href="#p3" class="nav next">❯</a>
+</div>
+
+<div id="p3" class="lightbox">
+<a href="#" class="close">×</a>
+<a href="#p2" class="nav prev">❮</a>
+<img src="images/704 (3).jpg">
+<a href="#p4" class="nav next">❯</a>
+</div>
+
+<div id="p4" class="lightbox">
+<a href="#" class="close">×</a>
+<a href="#p3" class="nav prev">❮</a>
+<img src="images/704 (4).jpg">
+<a href="#p5" class="nav next">❯</a>
+</div>
+
+<div id="p5" class="lightbox">
+<a href="#" class="close">×</a>
+<a href="#p4" class="nav prev">❮</a>
+<img src="images/704 (5).jpg">
+<a href="#p1" class="nav next">❯</a>
+</div>
+
+</body>
+</html>
