@@ -1,185 +1,740 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Hotel Xalia</title>
+<style>
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:tahoma;}
+/* VIP BACKGROUND */
+body{
+  background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),url("hotel-bg.jpg") center/cover fixed;
+  color:white;
+}
+/* NAV */
+nav{position:sticky;top:0;background:rgba(179,0,0,.9);padding:18px;display:flex;justify-content:center;gap:40px;}
+nav a{color:white;text-decoration:none;font-size:18px;font-weight:bold;}
+/* SECTION */
+section{padding:60px 20px;text-align:center;}
+/* ROOMS */
+.rooms{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:20px;max-width:700px;margin:auto;}
+.rooms a{background:white;color:#333;padding:18px;border-radius:15px;text-decoration:none;font-weight:bold;}
+/* LIGHTBOX */
+.lightbox{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);opacity:0;pointer-events:none;display:flex;justify-content:center;align-items:center;}
+.lightbox:target{opacity:1;pointer-events:auto;}
+/* CARD */
+.card{background:white;color:#222;width:95%;max-width:520px;border-radius:20px;overflow:hidden;position:relative;}
+/* SLIDER */
+.slider{display:flex;overflow-x:auto;gap:10px;padding:12px;}
+.slider img{height:220px;border-radius:12px;}
+/* CONTENT */
+.content{padding:20px;direction:rtl;text-align:right;}
+/* LANG BUTTONS */
+.lang button{margin:5px;padding:8px 12px;border:none;border-radius:10px;background:#444;color:white;cursor:pointer;}
+/* RESERVE */
+.reserve{background:#25D366;color:white;border:none;width:100%;padding:16px;font-size:18px;border-radius:12px;margin-top:15px;cursor:pointer;}
+/* CLOSE */
+.close{position:absolute;top:20px;right:30px;font-size:45px;color:white;text-decoration:none;}
+</style>
+</head>
+<!DOCTYPE html>
+<html lang="fa">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-
-<title>اتاق 704</title>
-
+<title>Hotel Xalia</title>
 <style>
+body{font-family:tahoma;background:#f5f5f5;margin:0;padding:0;}
+header{background:#b30000;color:white;padding:20px;display:flex;justify-content:space-between;align-items:center;}
+header h2{margin:0;font-size:22px;display:flex;align-items:center;gap:10px;}
+.menu{position:relative;}
+.menu button{background:#333;color:white;border:none;padding:10px 15px;border-radius:8px;cursor:pointer;}
+.menu-content{display:none;position:absolute;top:40px;right:0;background:white;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.2);overflow:hidden;min-width:180px;}
+.menu-content a{display:block;padding:12px 20px;text-decoration:none;color:white;font-weight:bold;}
+.menu-content a.whatsapp{background:#25D366;} /* واتساپ سبز */
+.menu-content a.instagram{background:#E1306C;} /* اینستاگرام صورتی */
+.menu-content a.phone{background:#007BFF;} /* تماس آبی */
+.menu-content a:hover{opacity:.8;}
+.menu.show .menu-content{display:block;}
 
-/* ================= RESET ================= */
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:tahoma;
+.floor-title {
+  display: flex;              /* استفاده از فلکس */
+  justify-content: center;    /* وسط‌چین افقی */
+  align-items: center;        /* وسط‌چین عمودی */
+  font-size: 28px;            /* بزرگ‌تر */
+  font-weight: bold;          /* ضخیم */
+  color: #b30000;             /* قرمز هتلی */
+  margin: 40px auto 20px;     /* فاصله بالا و پایین */
+  padding: 12px 20px;         /* فضای داخلی */
+  background: linear-gradient(90deg, #ffe0e0, #fff); /* بک‌گراند ملایم */
+  border-radius: 12px;        /* گوشه‌های گرد */
+  width: fit-content;         /* عرض به اندازه متن */
 }
 
-body{
-background:#111;
-color:#fff;
+.floor {
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 15px;
+  max-width: 700px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
 }
 
-/* ================= HEADER ================= */
-
-header{
-background:#b30000;
-padding:15px;
-text-align:center;
-font-size:22px;
+.floor-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: #b30000;
+  margin-bottom: 20px;
 }
 
-/* ================= SLIDER ================= */
-
-.slider{
-display:flex;
-overflow-x:auto;
-gap:15px;
-padding:20px;
-scroll-snap-type:x mandatory;
+.rooms {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+  gap: 15px;
 }
 
-.slider a{
-scroll-snap-align:center;
+.rooms a {
+  background: #f5f5f5;
+  color: #333;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  transition: all .3s ease;
 }
 
-.slider img{
-height:220px;
-border-radius:12px;
-transition:.3s;
+.rooms a:hover {
+  background: #b30000;
+  color: white;
 }
 
-.slider img:hover{
-transform:scale(1.05);
-}
-
-/* ================= LIGHTBOX ================= */
-
-.lightbox{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.95);
-display:flex;
-justify-content:center;
-align-items:center;
-opacity:0;
-pointer-events:none;
-transition:.4s;
-z-index:999;
-}
-
-.lightbox:target{
-opacity:1;
-pointer-events:auto;
-}
-
-.lightbox img{
-max-width:90%;
-max-height:80%;
-border-radius:10px;
-}
-
-/* ================= NAV BUTTON ================= */
-
-.nav{
-position:absolute;
-top:50%;
-transform:translateY(-50%);
-font-size:40px;
-color:white;
-text-decoration:none;
-padding:20px;
-}
-
-.prev{left:10px;}
-.next{right:10px;}
-
-.close{
-position:absolute;
-top:25px;
-right:35px;
-font-size:40px;
-color:white;
-text-decoration:none;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:600px){
-
-.slider img{
-height:150px;
-}
-
-.nav{
-font-size:30px;
-}
-
-}
 
 </style>
 </head>
-
 <body>
 
 <header>
-اتاق 704 - Hotel Gallery
+  <h2>🏨 اتاق های هتل</h2>
+  <div class="menu" id="contactMenu">
+    <button onclick="toggleMenu()">ارتباط با ما ☰</button>
+    <div class="menu-content">
+      <a href="https://wa.me/905464658083" target="_blank" class="whatsapp">واتساپ</a>
+      <a href="https://www.instagram.com/istanbul_apartman_hotel_suite" target="_blank" class="instagram">اینستاگرام</a>
+      <a href="tel:+905464658083" class="phone">تماس مستقیم</a>
+    </div>
+  </div>
 </header>
 
-<!-- ================= SLIDER ================= -->
 
-<div class="slider">
 
-<a href="#p1"><img src="images/704 (1).jpg"></a>
-<a href="#p2"><img src="images/704 (2).jpg"></a>
-<a href="#p3"><img src="images/704 (3).jpg"></a>
-<a href="#p4"><img src="images/704 (4).jpg"></a>
-<a href="#p5"><img src="images/704 (5).jpg"></a>
 
+
+
+
+
+
+
+<section id="rooms">
+  <h2>🏨 اتاق های هتل</h2>
+
+  <div class="floor">
+    <h3 class="floor-title">واحد ها </h3>
+    <div class="rooms">
+      <a href="#room501">اتاق 501</a>
+      <a href="#room502">اتاق 502</a>
+      <a href="#room503">اتاق 503</a>
+      <a href="#room504">اتاق 504</a>
+      <a href="#room505">اتاق 505</a>
+      <a href="#room601">اتاق 601</a>
+      <a href="#room602">اتاق 602</a>
+      <a href="#room603">اتاق 603</a>
+      <a href="#room604">اتاق 604</a>
+      <a href="#room701">اتاق 701</a>
+      <a href="#room702">اتاق 702</a>
+      <a href="#room703">اتاق 703</a>
+      <a href="#room704">اتاق 704</a>
+      <a href="#room705">اتاق 705</a>
+    </div>
+  </div>
+</section>
+
+<!-- ROOM BLOCKS: each room has structure only; texts injected from JS -->
+<!-- ROOM 501 -->
+<div id="room501" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="501 (1).jpg" alt="501-1">
+      <img src="501 (2).jpg" alt="501-2">
+      <img src="501 (3).jpg" alt="501-3">
+    </div>
+    <div class="content" id="box-501">
+      <h2 id="title-501"></h2>
+      <p id="desc-501"></p>
+      <div class="lang">
+        <button data-room="501" data-lang="fa">🇮🇷</button>
+        <button data-room="501" data-lang="en">🇬🇧</button>
+        <button data-room="501" data-lang="ar">🇸🇦</button>
+        <button data-room="501" data-lang="zh">🇨🇳</button>
+        <button data-room="501" data-lang="ru">🇷🇺</button>
+        <button data-room="501" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-501">رزرو</button>
+    </div>
+  </div>
 </div>
 
-<!-- ================= LIGHTBOX ================= -->
-
-<div id="p1" class="lightbox">
-<a href="#" class="close">×</a>
-<a href="#p5" class="nav prev">❮</a>
-<img src="images/704 (1).jpg">
-<a href="#p2" class="nav next">❯</a>
+<!-- ROOM 502 -->
+<div id="room502" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="502 (1).jpg" alt="502-1">
+      <img src="502 (2).jpg" alt="502-2">
+      <img src="502 (3).jpg" alt="502-3">
+    </div>
+    <div class="content" id="box-502">
+      <h2 id="title-502"></h2>
+      <p id="desc-502"></p>
+      <div class="lang">
+        <button data-room="502" data-lang="fa">🇮🇷</button>
+        <button data-room="502" data-lang="en">🇬🇧</button>
+        <button data-room="502" data-lang="ar">🇸🇦</button>
+        <button data-room="502" data-lang="zh">🇨🇳</button>
+        <button data-room="502" data-lang="ru">🇷🇺</button>
+        <button data-room="502" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-502">رزرو</button>
+    </div>
+  </div>
 </div>
 
-<div id="p2" class="lightbox">
-<a href="#" class="close">×</a>
-<a href="#p1" class="nav prev">❮</a>
-<img src="images/704 (2).jpg">
-<a href="#p3" class="nav next">❯</a>
+<!-- ROOM 503 -->
+<div id="room503" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="503 (1).jpg" alt="503-1">
+      <img src="503 (2).jpg" alt="503-2">
+      <img src="503 (3).jpg" alt="503-3">
+    </div>
+    <div class="content" id="box-503">
+      <h2 id="title-503"></h2>
+      <p id="desc-503"></p>
+      <div class="lang">
+        <button data-room="503" data-lang="fa">🇮🇷</button>
+        <button data-room="503" data-lang="en">🇬🇧</button>
+        <button data-room="503" data-lang="ar">🇸🇦</button>
+        <button data-room="503" data-lang="zh">🇨🇳</button>
+        <button data-room="503" data-lang="ru">🇷🇺</button>
+        <button data-room="503" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-503">رزرو</button>
+    </div>
+  </div>
 </div>
 
-<div id="p3" class="lightbox">
-<a href="#" class="close">×</a>
-<a href="#p2" class="nav prev">❮</a>
-<img src="images/704 (3).jpg">
-<a href="#p4" class="nav next">❯</a>
+<!-- ROOM 504 -->
+<div id="room504" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="504 (1).jpg" alt="504-1">
+      <img src="504 (2).jpg" alt="504-2">
+      <img src="504 (3).jpg" alt="504-3">
+    </div>
+    <div class="content" id="box-504">
+      <h2 id="title-504"></h2>
+      <p id="desc-504"></p>
+      <div class="lang">
+        <button data-room="504" data-lang="fa">🇮🇷</button>
+        <button data-room="504" data-lang="en">🇬🇧</button>
+        <button data-room="504" data-lang="ar">🇸🇦</button>
+        <button data-room="504" data-lang="zh">🇨🇳</button>
+        <button data-room="504" data-lang="ru">🇷🇺</button>
+        <button data-room="504" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-504">رزرو</button>
+    </div>
+  </div>
 </div>
 
-<div id="p4" class="lightbox">
-<a href="#" class="close">×</a>
-<a href="#p3" class="nav prev">❮</a>
-<img src="images/704 (4).jpg">
-<a href="#p5" class="nav next">❯</a>
+<!-- ROOM 505 -->
+<div id="room505" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="505 (1).jpg" alt="505-1">
+      <img src="505 (2).jpg" alt="505-2">
+      <img src="505 (3).jpg" alt="505-3">
+    </div>
+    <div class="content" id="box-505">
+      <h2 id="title-505"></h2>
+      <p id="desc-505"></p>
+      <div class="lang">
+        <button data-room="505" data-lang="fa">🇮🇷</button>
+        <button data-room="505" data-lang="en">🇬🇧</button>
+        <button data-room="505" data-lang="ar">🇸🇦</button>
+        <button data-room="505" data-lang="zh">🇨🇳</button>
+        <button data-room="505" data-lang="ru">🇷🇺</button>
+        <button data-room="505" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-505">رزرو</button>
+    </div>
+  </div>
 </div>
 
-<div id="p5" class="lightbox">
-<a href="#" class="close">×</a>
-<a href="#p4" class="nav prev">❮</a>
-<img src="images/704 (5).jpg">
-<a href="#p1" class="nav next">❯</a>
+<!-- ROOM 601 -->
+<div id="room601" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="601 (1).jpg" alt="601-1">
+      <img src="601 (2).jpg" alt="601-2">
+      <img src="601 (3).jpg" alt="601-3">
+    </div>
+    <div class="content" id="box-601">
+      <h2 id="title-601"></h2>
+      <p id="desc-601"></p>
+      <div class="lang">
+        <button data-room="601" data-lang="fa">🇮🇷</button>
+        <button data-room="601" data-lang="en">🇬🇧</button>
+        <button data-room="601" data-lang="ar">🇸🇦</button>
+        <button data-room="601" data-lang="zh">🇨🇳</button>
+        <button data-room="601" data-lang="ru">🇷🇺</button>
+        <button data-room="601" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-601">رزرو</button>
+    </div>
+  </div>
 </div>
+
+<!-- ROOM 602 -->
+<div id="room602" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="602 (1).jpg" alt="602-1">
+      <img src="602 (2).jpg" alt="602-2">
+      <img src="602 (3).jpg" alt="602-3">
+    </div>
+    <div class="content" id="box-602">
+      <h2 id="title-602"></h2>
+      <p id="desc-602"></p>
+      <div class="lang">
+        <button data-room="602" data-lang="fa">🇮🇷</button>
+        <button data-room="602" data-lang="en">🇬🇧</button>
+        <button data-room="602" data-lang="ar">🇸🇦</button>
+        <button data-room="602" data-lang="zh">🇨🇳</button>
+        <button data-room="602" data-lang="ru">🇷🇺</button>
+        <button data-room="602" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-602">رزرو</button>
+    </div>
+  </div>
+</div>
+
+<!-- ROOM 603 -->
+<div id="room603" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="603 (1).jpg" alt="603-1">
+      <img src="603 (2).jpg" alt="603-2">
+      <img src="603 (3).jpg" alt="603-3">
+    </div>
+    <div class="content" id="box-603">
+      <h2 id="title-603"></h2>
+      <p id="desc-603"></p>
+      <div class="lang">
+        <button data-room="603" data-lang="fa">🇮🇷</button>
+        <button data-room="603" data-lang="en">🇬🇧</button>
+        <button data-room="603" data-lang="ar">🇸🇦</button>
+        <button data-room="603" data-lang="zh">🇨🇳</button>
+        <button data-room="603" data-lang="ru">🇷🇺</button>
+        <button data-room="603" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-603">رزرو</button>
+    </div>
+  </div>
+</div>
+
+<!-- ROOM 604 -->
+<div id="room604" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="604 (1).jpg" alt="604-1">
+      <img src="604 (2).jpg" alt="604-2">
+      <img src="604 (3).jpg" alt="604-3">
+    </div>
+    <div class="content" id="box-604">
+      <h2 id="title-604"></h2>
+      <p id="desc-604"></p>
+      <div class="lang">
+        <button data-room="604" data-lang="fa">🇮🇷</button>
+        <button data-room="604" data-lang="en">🇬🇧</button>
+        <button data-room="604" data-lang="ar">🇸🇦</button>
+        <button data-room="604" data-lang="zh">🇨🇳</button>
+        <button data-room="604" data-lang="ru">🇷🇺</button>
+        <button data-room="604" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-604">رزرو</button>
+    </div>
+  </div>
+</div>
+
+<!-- ROOM 701 -->
+<div id="room701" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="701 (1).jpg" alt="701-1">
+      <img src="701 (2).jpg" alt="701-2">
+      <img src="701 (3).jpg" alt="701-3">
+    </div>
+    <div class="content" id="box-701">
+      <h2 id="title-701"></h2>
+      <p id="desc-701"></p>
+      <div class="lang">
+        <button data-room="701" data-lang="fa">🇮🇷</button>
+        <button data-room="701" data-lang="en">🇬🇧</button>
+        <button data-room="701" data-lang="ar">🇸🇦</button>
+        <button data-room="701" data-lang="zh">🇨🇳</button>
+        <button data-room="701" data-lang="ru">🇷🇺</button>
+        <button data-room="701" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-701">رزرو</button>
+    </div>
+  </div>
+</div>
+
+<!-- ROOM 702 -->
+<div id="room702" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="702 (1).jpg" alt="702-1">
+      <img src="702 (2).jpg" alt="702-2">
+      <img src="702 (3).jpg" alt="702-3">
+    </div>
+    <div class="content" id="box-702">
+      <h2 id="title-702"></h2>
+      <p id="desc-702"></p>
+      <div class="lang">
+        <button data-room="702" data-lang="fa">🇮🇷</button>
+        <button data-room="702" data-lang="en">🇬🇧</button>
+        <button data-room="702" data-lang="ar">🇸🇦</button>
+        <button data-room="702" data-lang="zh">🇨🇳</button>
+        <button data-room="702" data-lang="ru">🇷🇺</button>
+        <button data-room="702" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-702">رزرو</button>
+    </div>
+  </div>
+</div>
+
+<!-- ROOM 703 -->
+<div id="room703" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="703 (1).jpg" alt="703-1">
+      <img src="703 (2).jpg" alt="703-2">
+      <img src="703 (3).jpg" alt="703-3">
+    </div>
+    <div class="content" id="box-703">
+      <h2 id="title-703"></h2>
+      <p id="desc-703"></p>
+      <div class="lang">
+        <button data-room="703" data-lang="fa">🇮🇷</button>
+        <button data-room="703" data-lang="en">🇬🇧</button>
+        <button data-room="703" data-lang="ar">🇸🇦</button>
+        <button data-room="703" data-lang="zh">🇨🇳</button>
+        <button data-room="703" data-lang="ru">🇷🇺</button>
+        <button data-room="703" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-703">رزرو</button>
+    </div>
+  </div>
+</div>
+
+<!-- ROOM 704 -->
+<div id="room704" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="704 (1).jpg" alt="704-1">
+      <img src="704 (2).jpg" alt="704-2">
+      <img src="704 (3).jpg" alt="704-3">
+      <img src="704 (4).jpg" alt="704-4">
+    </div>
+    <div class="content" id="box-704">
+      <h2 id="title-704"></h2>
+      <p id="desc-704"></p>
+      <div class="lang">
+        <button data-room="704" data-lang="fa">🇮🇷</button>
+        <button data-room="704" data-lang="en">🇬🇧</button>
+        <button data-room="704" data-lang="ar">🇸🇦</button>
+        <button data-room="704" data-lang="zh">🇨🇳</button>
+        <button data-room="704" data-lang="ru">🇷🇺</button>
+        <button data-room="704" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-704">رزرو</button>
+    </div>
+  </div>
+</div>
+
+<!-- ROOM 705 -->
+<div id="room705" class="lightbox">
+  <a href="#" class="close">×</a>
+  <div class="card">
+    <div class="slider">
+      <img src="705 (1).jpg" alt="705-1">
+      <img src="705 (2).jpg" alt="705-2">
+      <img src="705 (3).jpg" alt="705-3">
+      <img src="705 (4).jpg" alt="705-3">
+      <img src="705 (5).jpg" alt="705-3">
+      <img src="705 (6).jpg" alt="705-3">
+      <img src="705 (7).jpg" alt="705-3">
+      <img src="705 (8).jpg" alt="705-3">
+      <img src="705 (9).jpg" alt="705-3">
+      <img src="705 (10).jpg" alt="705-3">
+      <img src="705 (11).jpg" alt="705-3">
+    </div>
+    <div class="content" id="box-705">
+      <h2 id="title-705"></h2>
+      <p id="desc-705"></p>
+      <div class="lang">
+        <button data-room="705" data-lang="fa">🇮🇷</button>
+        <button data-room="705" data-lang="en">🇬🇧</button>
+        <button data-room="705" data-lang="ar">🇸🇦</button>
+        <button data-room="705" data-lang="zh">🇨🇳</button>
+        <button data-room="705" data-lang="ru">🇷🇺</button>
+        <button data-room="705" data-lang="tr">🇹🇷</button>
+      </div>
+      <button class="reserve" id="reserve-705">رزرو</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Full roomsData object (all rooms 501-505, 601-604, 701-705) */
+const roomsData = {
+  "501": {
+    fa:{dir:"rtl",title:"🏨 اتاق 501 — Premium Suite",desc:`✨ سوئیت لوکس نزدیک میدان تکسیم<br>🛏 تخت دو نفره بزرگ<br>📶 اینترنت رایگان<br>❄️ تهویه مطبوع<br>🍳 آشپزخانه کامل<br>🚿 حمام مدرن<br>📺 Smart TV<br>☕ چای‌ساز<br>⭐ امتیاز مهمانان: 5/5<br>👥 ظرفیت: 2 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 501 (من اتاق 501 میخواهم رزرو کنم)"},
+    en:{dir:"ltr",title:"🏨 Room 501 — Premium Suite",desc:`✨ Luxury suite near Taksim Square<br>🛏 Large double bed<br>📶 Free WiFi<br>❄️ Air conditioning<br>🍳 Full kitchen<br>🚿 Modern bathroom<br>📺 Smart TV<br>☕ Tea maker<br>⭐ Guest rating: 5/5<br>👥 Capacity: 2`,btn:"Reserve Room",waText:"I want to reserve Room 501"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 501 — Premium Suite",desc:`✨ جناح فاخر بالقرب من تقسيم<br>🛏 سرير مزدوج كبير<br>📶 واي فاي مجاني<br>❄️ تكييف<br>🍳 مطبخ كامل<br>🚿 حمام حديث<br>📺 Smart TV<br>☕ صانع الشاي<br>⭐ تقييم الضيوف: 5/5<br>👥 السعة: 2`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 501"},
+    zh:{dir:"ltr",title:"🏨 501号房 — Premium Suite",desc:`✨ 靠近塔克西姆广场豪华套房<br>🛏 大床<br>📶 免费WiFi<br>❄️ 空调<br>🍳 完整厨房<br>🚿 现代浴室<br>📺 智能电视<br>☕ 茶具<br>⭐ 客人评分: 5/5<br>👥 容量: 2`,btn:"预订房间",waText:"I want to reserve Room 501"},
+    ru:{dir:"ltr",title:"🏨 Номер 501 — Premium Suite",desc:`✨ Люкс рядом с Таксим<br>🛏 Двуспальная кровать<br>📶 Бесплатный WiFi<br>❄️ Кондиционер<br>🍳 Полная кухня<br>🚿 Современная ванная<br>📺 Smart TV<br>☕ Чайник<br>⭐ Рейтинг гостей: 5/5<br>👥 Вместимость: 2`,btn:"Забронировать",waText:"I want to reserve Room 501"},
+    tr:{dir:"ltr",title:"🏨 Oda 501 — Premium Suite",desc:`✨ Taksim yakınında lüks süit<br>🛏 Çift kişilik büyük yatak<br>📶 Ücretsiz internet<br>❄️ Klima<br>🍳 Tam mutfak<br>🚿 Modern banyo<br>📺 Smart TV<br>☕ Çay makinesi<br>⭐ Misafir puanı: 5/5<br>👥 Kapasite: 2`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 501"}
+  },
+
+  "502": {
+    fa:{dir:"rtl",title:"🏨 اتاق 502 — Deluxe Room",desc:`🌇 نمای شهری<br>🛏 تخت دبل راحت<br>📶 WiFi رایگان<br>❄️ کولر و گرمایش مرکزی<br>🚿 حمام اختصاصی<br>📺 تلویزیون<br>🧳 مناسب اقامت کاری<br>⭐ امتیاز: 4.8/5<br>👥 ظرفیت: 2 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 502"},
+    en:{dir:"ltr",title:"🏨 Room 502 — Deluxe Room",desc:`🌇 City view<br>🛏 Comfortable double bed<br>📶 Free WiFi<br>❄️ Central heating & cooling<br>🚿 Private bathroom<br>📺 TV<br>🧳 Suitable for business stays<br>⭐ Rating: 4.8/5<br>👥 Capacity: 2`,btn:"Reserve Room",waText:"I want to reserve Room 502"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 502 — Deluxe Room",desc:`🌇 إطلالة على المدينة<br>🛏 سرير مزدوج مريح<br>📶 واي فاي مجاني<br>❄️ تدفئة وتبريد مركزي<br>🚿 حمام خاص<br>📺 تلفاز<br>🧳 مناسب للإقامة العملية<br>⭐ تقييم: 4.8/5<br>👥 السعة: 2`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 502"},
+    zh:{dir:"ltr",title:"🏨 502号房 — Deluxe Room",desc:`🌇 城市景观<br>🛏 舒适双人床<br>📶 免费WiFi<br>❄️ 中央空调与供暖<br>🚿 私人浴室<br>📺 电视<br>🧳 适合商务出行<br>⭐ 评分: 4.8/5<br>👥 容量: 2`,btn:"预订房间",waText:"I want to reserve Room 502"},
+    ru:{dir:"ltr",title:"🏨 Номер 502 — Deluxe Room",desc:`🌇 Вид на город<br>🛏 Удобная двуспальная кровать<br>📶 Бесплатный WiFi<br>❄️ Центральное отопление и охлаждение<br>🚿 Частная ванная<br>📺 Телевизор<br>🧳 Подходит для деловых поездок<br>⭐ Рейтинг: 4.8/5<br>👥 Вместимость: 2`,btn:"Забронировать",waText:"I want to reserve Room 502"},
+    tr:{dir:"ltr",title:"🏨 Oda 502 — Deluxe Room",desc:`🌇 Şehir manzarası<br>🛏 Rahat çift kişilik yatak<br>📶 Ücretsiz WiFi<br>❄️ Merkezi ısıtma ve soğutma<br>🚿 Özel banyo<br>📺 TV<br>🧳 İş seyahatleri için uygun<br>⭐ Puan: 4.8/5<br>👥 Kapasite: 2`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 502"}
+  },
+
+  "503": {
+    fa:{dir:"rtl",title:"🏨 اتاق 503 — Comfort Room",desc:`✨ اقتصادی و شیک<br>🛏 تخت دو نفره<br>📶 اینترنت پرسرعت<br>🚿 حمام خصوصی<br>📺 TV<br>🌙 محیط آرام<br>⭐ امتیاز: 4.7/5<br>👥 ظرفیت: 2 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 503"},
+    en:{dir:"ltr",title:"🏨 Room 503 — Comfort Room",desc:`✨ Economical and stylish<br>🛏 Double bed<br>📶 High-speed internet<br>🚿 Private bathroom<br>📺 TV<br>🌙 Quiet atmosphere<br>⭐ Rating: 4.7/5<br>👥 Capacity: 2`,btn:"Reserve Room",waText:"I want to reserve Room 503"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 503 — Comfort Room",desc:`✨ اقتصادي وأنيق<br>🛏 سرير مزدوج<br>📶 إنترنت عالي السرعة<br>🚿 حمام خاص<br>📺 تلفاز<br>🌙 جو هادئ<br>⭐ تقييم: 4.7/5<br>👥 السعة: 2`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 503"},
+    zh:{dir:"ltr",title:"🏨 503号房 — Comfort Room",desc:`✨ 经济又时尚<br>🛏 双人床<br>📶 高速网络<br>🚿 私人浴室<br>📺 电视<br>🌙 安静的环境<br>⭐ 评分: 4.7/5<br>👥 容量: 2`,btn:"预订房间",waText:"I want to reserve Room 503"},
+    ru:{dir:"ltr",title:"🏨 Номер 503 — Comfort Room",desc:`✨ Экономично и стильно<br>🛏 Двуспальная кровать<br>📶 Высокоскоростной интернет<br>🚿 Частная ванная<br>📺 ТВ<br>🌙 Тихая атмосфера<br>⭐ Рейтинг: 4.7/5<br>👥 Вместимость: 2`,btn:"Забронировать",waText:"I want to reserve Room 503"},
+    tr:{dir:"ltr",title:"🏨 Oda 503 — Comfort Room",desc:`✨ Ekonomik ve şık<br>🛏 Çift kişilik yatak<br>📶 Yüksek hızlı internet<br>🚿 Özel banyo<br>📺 TV<br>🌙 Sessiz ortam<br>⭐ Puan: 4.7/5<br>👥 Kapasite: 2`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 503"}
+  },
+
+  "504": {
+    fa:{dir:"rtl",title:"🏨 اتاق 504 — Standard Room",desc:`✨ اتاق استاندارد و راحت<br>🛏 تخت یک یا دو نفره<br>📶 اینترنت رایگان<br>🚿 حمام خصوصی<br>📺 تلویزیون<br>⭐ امتیاز: 4.6/5<br>👥 ظرفیت: 2 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 504"},
+    en:{dir:"ltr",title:"🏨 Room 504 — Standard Room",desc:`✨ Comfortable standard room<br>🛏 Single or double bed<br>📶 Free internet<br>🚿 Private bathroom<br>📺 TV<br>⭐ Rating: 4.6/5<br>👥 Capacity: 2`,btn:"Reserve Room",waText:"I want to reserve Room 504"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 504 — Standard Room",desc:`✨ غرفة قياسية مريحة<br>🛏 سرير مفرد أو مزدوج<br>📶 واي فاي مجاني<br>🚿 حمام خاص<br>📺 تلفاز<br>⭐ تقييم: 4.6/5<br>👥 السعة: 2`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 504"},
+    zh:{dir:"ltr",title:"🏨 504号房 — Standard Room",desc:`✨ 舒适标准间<br>🛏 单人或双人床<br>📶 免费网络<br>🚿 私人浴室<br>📺 电视<br>⭐ 评分: 4.6/5<br>👥 容量: 2`,btn:"预订房间",waText:"I want to reserve Room 504"},
+    ru:{dir:"ltr",title:"🏨 Номер 504 — Standard Room",desc:`✨ Комфортный стандартный номер<br>🛏 Одно- или двуспальная кровать<br>📶 Бесплатный интернет<br>🚿 Частная ванная<br>📺 ТВ<br>⭐ Рейтинг: 4.6/5<br>👥 Вместимость: 2`,btn:"Забронировать",waText:"I want to reserve Room 504"},
+    tr:{dir:"ltr",title:"🏨 Oda 504 — Standard Room",desc:`✨ Konforlu standart oda<br>🛏 Tek veya çift kişilik yatak<br>📶 Ücretsiz internet<br>🚿 Özel banyo<br>📺 TV<br>⭐ Puan: 4.6/5<br>👥 Kapasite: 2`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 504"}
+  },
+
+  "505": {
+    fa:{dir:"rtl",title:"🏨 اتاق 505 — Superior Room",desc:`✨ اتاق سوپریور با امکانات بیشتر<br>🛏 تخت راحت<br>📶 اینترنت پرسرعت<br>🚿 حمام اختصاصی<br>📺 تلویزیون هوشمند<br>⭐ امتیاز: 4.7/5<br>👥 ظرفیت: 2 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 505"},
+    en:{dir:"ltr",title:"🏨 Room 505 — Superior Room",desc:`✨ Superior room with extra amenities<br>🛏 Comfortable bed<br>📶 High-speed internet<br>🚿 Private bathroom<br>📺 Smart TV<br>⭐ Rating: 4.7/5<br>👥 Capacity: 2`,btn:"Reserve Room",waText:"I want to reserve Room 505"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 505 — Superior Room",desc:`✨ غرفة سوبريور مع وسائل راحة إضافية<br>🛏 سرير مريح<br>📶 إنترنت عالي السرعة<br>🚿 حمام خاص<br>📺 تلفاز ذكي<br>⭐ تقييم: 4.7/5<br>👥 السعة: 2`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 505"},
+    zh:{dir:"ltr",title:"🏨 505号房 — Superior Room",desc:`✨ 配备更多设施的高级房<br>🛏 舒适床铺<br>📶 高速网络<br>🚿 私人浴室<br>📺 智能电视<br>⭐ 评分: 4.7/5<br>👥 容量: 2`,btn:"预订房间",waText:"I want to reserve Room 505"},
+    ru:{dir:"ltr",title:"🏨 Номер 505 — Superior Room",desc:`✨ Номер повышенной комфортности с дополнительными удобствами<br>🛏 Комфортная кровать<br>📶 Высокоскоростной интернет<br>🚿 Частная ванная<br>📺 Smart TV<br>⭐ Рейтинг: 4.7/5<br>👥 Вместимость: 2`,btn:"Забронировать",waText:"I want to reserve Room 505"},
+    tr:{dir:"ltr",title:"🏨 Oda 505 — Superior Room",desc:`✨ Ekstra olanaklara sahip superior oda<br>🛏 Konforlu yatak<br>📶 Yüksek hızlı internet<br>🚿 Özel banyo<br>📺 Smart TV<br>⭐ Puan: 4.7/5<br>👥 Kapasite: 2`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 505"}
+  },
+
+  "601": {
+    fa:{dir:"rtl",title:"🏨 اتاق 601 — Executive Suite",desc:`💎 سوئیت اجرایی<br>🛏 تخت King Size<br>📶 WiFi سریع<br>🍳 آشپزخانه<br>💼 میز کار<br>📺 Smart TV<br>🚿 حمام لوکس<br>⭐ امتیاز: 4.9/5<br>👥 ظرفیت: 3 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 601"},
+    en:{dir:"ltr",title:"🏨 Room 601 — Executive Suite",desc:`💎 Executive suite<br>🛏 King Size bed<br>📶 Fast WiFi<br>🍳 Kitchen<br>💼 Work desk<br>📺 Smart TV<br>🚿 Luxury bathroom<br>⭐ Rating: 4.9/5<br>👥 Capacity: 3`,btn:"Reserve Room",waText:"I want to reserve Room 601"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 601 — Executive Suite",desc:`💎 جناح تنفيذي<br>🛏 سرير كينغ<br>📶 واي فاي سريع<br>🍳 مطبخ<br>💼 مكتب عمل<br>📺 Smart TV<br>🚿 حمام فاخر<br>⭐ تقييم: 4.9/5<br>👥 السعة: 3`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 601"},
+    zh:{dir:"ltr",title:"🏨 601号房 — Executive Suite",desc:`💎 行政套房<br>🛏 特大床<br>📶 快速WiFi<br>🍳 厨房<br>💼 办公桌<br>📺 智能电视<br>🚿 豪华浴室<br>⭐ 评分: 4.9/5<br>👥 容量: 3`,btn:"预订房间",waText:"I want to reserve Room 601"},
+    ru:{dir:"ltr",title:"🏨 Номер 601 — Executive Suite",desc:`💎 Исполнительный люкс<br>🛏 Кровать king-size<br>📶 Быстрый WiFi<br>🍳 Кухня<br>💼 Рабочий стол<br>📺 Smart TV<br>🚿 Роскошная ванная<br>⭐ Рейтинг: 4.9/5<br>👥 Вместимость: 3`,btn:"Забронировать",waText:"I want to reserve Room 601"},
+    tr:{dir:"ltr",title:"🏨 Oda 601 — Executive Suite",desc:`💎 Yönetici süiti<br>🛏 King Size yatak<br>📶 Hızlı WiFi<br>🍳 Mutfak<br>💼 Çalışma masası<br>📺 Smart TV<br>🚿 Lüks banyo<br>⭐ Puan: 4.9/5<br>👥 Kapasite: 3`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 601"}
+  },
+
+  "602": {
+    fa:{dir:"rtl",title:"🏨 اتاق 602 — Business Room",desc:`💼 مناسب سفر کاری<br>🛏 تخت دبل<br>📶 اینترنت پایدار<br>🖥 میز کار حرفه‌ای<br>📺 TV<br>❄️ تهویه مطبوع<br>⭐ امتیاز: 4.8/5<br>👥 ظرفیت: 2 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 602"},
+    en:{dir:"ltr",title:"🏨 Room 602 — Business Room",desc:`💼 Ideal for business travel<br>🛏 Double bed<br>📶 Stable internet<br>🖥 Professional work desk<br>📺 TV<br>❄️ Air conditioning<br>⭐ Rating: 4.8/5<br>👥 Capacity: 2`,btn:"Reserve Room",waText:"I want to reserve Room 602"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 602 — Business Room",desc:`💼 مناسب للسفر العملي<br>🛏 سرير مزدوج<br>📶 إنترنت مستقر<br>🖥 مكتب عمل احترافي<br>📺 تلفاز<br>❄️ تكييف<br>⭐ تقييم: 4.8/5<br>👥 السعة: 2`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 602"},
+    zh:{dir:"ltr",title:"🏨 602号房 — Business Room",desc:`💼 适合商务出行<br>🛏 双人床<br>📶 稳定网络<br>🖥 专业办公桌<br>📺 电视<br>❄️ 空调<br>⭐ 评分: 4.8/5<br>👥 容量: 2`,btn:"预订房间",waText:"I want to reserve Room 602"},
+    ru:{dir:"ltr",title:"🏨 Номер 602 — Business Room",desc:`💼 Подходит для деловых поездок<br>🛏 Двуспальная кровать<br>📶 Стабильный интернет<br>🖥 Профессиональный рабочий стол<br>📺 ТВ<br>❄️ Кондиционер<br>⭐ Рейтинг: 4.8/5<br>👥 Вместимость: 2`,btn:"Забронировать",waText:"I want to reserve Room 602"},
+    tr:{dir:"ltr",title:"🏨 Oda 602 — Business Room",desc:`💼 İş seyahatleri için uygun<br>🛏 Çift kişilik yatak<br>📶 Kararlı internet<br>🖥 Profesyonel çalışma masası<br>📺 TV<br>❄️ Klima<br>⭐ Puan: 4.8/5<br>👥 Kapasite: 2`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 602"}
+  },
+
+  "603": {
+    fa:{dir:"rtl",title:"🏨 اتاق 603 — Family Room",desc:`👨‍👩‍👧 مناسب خانواده<br>🛏 تخت دبل + سینگل<br>🍳 آشپزخانه کوچک<br>📺 تلویزیون بزرگ<br>🚿 حمام کامل<br>📶 WiFi رایگان<br>⭐ امتیاز: 4.9/5<br>👥 ظرفیت: 4 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 603"},
+    en:{dir:"ltr",title:"🏨 Room 603 — Family Room",desc:`👨‍👩‍👧 Family friendly<br>🛏 Double + single bed<br>🍳 Small kitchen<br>📺 Large TV<br>🚿 Full bathroom<br>📶 Free WiFi<br>⭐ Rating: 4.9/5<br>👥 Capacity: 4`,btn:"Reserve Room",waText:"I want to reserve Room 603"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 603 — Family Room",desc:`👨‍👩‍👧 مناسب للعائلات<br>🛏 سرير مزدوج + مفرد<br>🍳 مطبخ صغير<br>📺 تلفاز كبير<br>🚿 حمام كامل<br>📶 واي فاي مجاني<br>⭐ تقييم: 4.9/5<br>👥 السعة: 4`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 603"},
+    zh:{dir:"ltr",title:"🏨 603号房 — Family Room",desc:`👨‍👩‍👧 适合家庭<br>🛏 双人床 + 单人床<br>🍳 小厨房<br>📺 大电视<br>🚿 完整浴室<br>📶 免费WiFi<br>⭐ 评分: 4.9/5<br>👥 容量: 4`,btn:"预订房间",waText:"I want to reserve Room 603"},
+    ru:{dir:"ltr",title:"🏨 Номер 603 — Family Room",desc:`👨‍👩‍👧 Подходит для семьи<br>🛏 Двуспальная + односпальная кровать<br>🍳 Маленькая кухня<br>📺 Большой телевизор<br>🚿 Полная ванная<br>📶 Бесплатный WiFi<br>⭐ Рейтинг: 4.9/5<br>👥 Вместимость: 4`,btn:"Забронировать",waText:"I want to reserve Room 603"},
+    tr:{dir:"ltr",title:"🏨 Oda 603 — Family Room",desc:`👨‍👩‍👧 Aileler için uygun<br>🛏 Çift kişilik + tek kişilik yatak<br>🍳 Küçük mutfak<br>📺 Büyük TV<br>🚿 Tam banyo<br>📶 Ücretsiz WiFi<br>⭐ Puan: 4.9/5<br>👥 Kapasite: 4`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 603"}
+  },
+
+  "604": {
+    fa:{dir:"rtl",title:"🏨 اتاق 604 — Junior Suite",desc:`✨ جونیور سوئیت با فضای نشیمن<br>🛏 تخت کینگ یا دو نفره<br>📶 اینترنت پرسرعت<br>🍳 مینی آشپزخانه<br>📺 Smart TV<br>🚿 حمام شیک<br>⭐ امتیاز: 4.8/5<br>👥 ظرفیت: 2-3 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 604"},
+    en:{dir:"ltr",title:"🏨 Room 604 — Junior Suite",desc:`✨ Junior suite with seating area<br>🛏 King or double bed<br>📶 High-speed internet<br>🍳 Mini kitchen<br>📺 Smart TV<br>🚿 Stylish bathroom<br>⭐ Rating: 4.8/5<br>👥 Capacity: 2-3`,btn:"Reserve Room",waText:"I want to reserve Room 604"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 604 — Junior Suite",desc:`✨ جناح صغير مع منطقة جلوس<br>🛏 سرير كينغ أو مزدوج<br>📶 إنترنت عالي السرعة<br>🍳 مطبخ صغير<br>📺 Smart TV<br>🚿 حمام أنيق<br>⭐ تقييم: 4.8/5<br>👥 السعة: 2-3`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 604"},
+    zh:{dir:"ltr",title:"🏨 604号房 — Junior Suite",desc:`✨ 带休息区的高级套房<br>🛏 特大床或双人床<br>📶 高速网络<br>🍳 小厨房<br>📺 智能电视<br>🚿 时尚浴室<br>⭐ 评分: 4.8/5<br>👥 容量: 2-3`,btn:"预订房间",waText:"I want to reserve Room 604"},
+    ru:{dir:"ltr",title:"🏨 Номер 604 — Junior Suite",desc:`✨ Джуниор-сьют с зоной отдыха<br>🛏 Кровать king или двуспальная<br>📶 Высокоскоростной интернет<br>🍳 Мини-кухня<br>📺 Smart TV<br>🚿 Стильная ванная<br>⭐ Рейтинг: 4.8/5<br>👥 Вместимость: 2-3`,btn:"Забронировать",waText:"I want to reserve Room 604"},
+    tr:{dir:"ltr",title:"🏨 Oda 604 — Junior Suite",desc:`✨ Oturma alanlı junior süit<br>🛏 King veya çift kişilik yatak<br>📶 Yüksek hızlı internet<br>🍳 Mini mutfak<br>📺 Smart TV<br>🚿 Şık banyo<br>⭐ Puan: 4.8/5<br>👥 Kapasite: 2-3`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 604"}
+  },
+
+  "701": {
+    fa:{dir:"rtl",title:"🏨 اتاق 701 — Sky Executive",desc:`✨ سوئیت اسکای اجرایی<br>🌇 نمای پانوراما<br>🛏 تخت King Size<br>📶 اینترنت پرسرعت<br>💼 میز کار حرفه‌ای<br>📺 Smart TV<br>🚿 حمام لوکس<br>⭐ امتیاز: 5/5<br>👥 ظرفیت: 2 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 701"},
+    en:{dir:"ltr",title:"🏨 Room 701 — Sky Executive",desc:`✨ Sky executive suite<br>🌇 Panoramic view<br>🛏 King Size bed<br>📶 High-speed internet<br>💼 Professional work desk<br>📺 Smart TV<br>🚿 Luxury bathroom<br>⭐ Rating: 5/5<br>👥 Capacity: 2`,btn:"Reserve Room",waText:"I want to reserve Room 701"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 701 — Sky Executive",desc:`✨ جناح سكاي التنفيذي<br>🌇 إطلالة بانورامية<br>🛏 سرير كينغ<br>📶 إنترنت فائق السرعة<br>💼 مكتب عمل احترافي<br>📺 Smart TV<br>🚿 حمام فاخر<br>⭐ تقييم: 5/5<br>👥 السعة: 2`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 701"},
+    zh:{dir:"ltr",title:"🏨 701号房 — Sky Executive",desc:`✨ 天空行政套房<br>🌇 全景视野<br>🛏 特大床<br>📶 高速网络<br>💼 专业办公桌<br>📺 智能电视<br>🚿 豪华浴室<br>⭐ 评分: 5/5<br>👥 容量: 2`,btn:"预订房间",waText:"I want to reserve Room 701"},
+    ru:{dir:"ltr",title:"🏨 Номер 701 — Sky Executive",desc:`✨ Sky executive люкс<br>🌇 Панорамный вид<br>🛏 Кровать king-size<br>📶 Высокоскоростной интернет<br>💼 Рабочий стол<br>📺 Smart TV<br>🚿 Роскошная ванная<br>⭐ Рейтинг: 5/5<br>👥 Вместимость: 2`,btn:"Забронировать",waText:"I want to reserve Room 701"},
+    tr:{dir:"ltr",title:"🏨 Oda 701 — Sky Executive",desc:`✨ Sky executive süit<br>🌇 Panoramik manzara<br>🛏 King Size yatak<br>📶 Yüksek hızlı internet<br>💼 Profesyonel çalışma masası<br>📺 Smart TV<br>🚿 Lüks banyo<br>⭐ Puan: 5/5<br>👥 Kapasite: 2`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 701"}
+  },
+
+  "702": {
+    fa:{dir:"rtl",title:"🏨 اتاق 702 — Horizon Suite",desc:`✨ سوئیت هورایزن با ویو گسترده<br>🛏 تخت King Size<br>📶 اینترنت پرسرعت<br>📺 Smart TV<br>🍷 مینی بار<br>🚿 حمام شیشه‌ای<br>⭐ امتیاز: 5/5<br>👥 ظرفیت: 2 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 702"},
+    en:{dir:"ltr",title:"🏨 Room 702 — Horizon Suite",desc:`✨ Horizon suite with wide view<br>🛏 King Size bed<br>📶 High-speed internet<br>📺 Smart TV<br>🍷 Mini bar<br>🚿 Glass bathroom<br>⭐ Rating: 5/5<br>👥 Capacity: 2`,btn:"Reserve Room",waText:"I want to reserve Room 702"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 702 — Horizon Suite",desc:`✨ جناح هورايزن بإطلالة واسعة<br>🛏 سرير كينغ<br>📶 إنترنت فائق السرعة<br>📺 Smart TV<br>🍷 ميني بار<br>🚿 حمام زجاجي<br>⭐ تقييم: 5/5<br>👥 السعة: 2`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 702"},
+    zh:{dir:"ltr",title:"🏨 702号房 — Horizon Suite",desc:`✨ 宽景Horizon套房<br>🛏 特大床<br>📶 高速网络<br>📺 智能电视<br>🍷 迷你吧<br>🚿 玻璃浴室<br>⭐ 评分: 5/5<br>👥 容量: 2`,btn:"预订房间",waText:"I want to reserve Room 702"},
+    ru:{dir:"ltr",title:"🏨 Номер 702 — Horizon Suite",desc:`✨ Люкс Horizon с широким видом<br>🛏 Кровать king-size<br>📶 Высокоскоростной интернет<br>📺 Smart TV<br>🍷 Мини-бар<br>🚿 Стеклянная ванная<br>⭐ Рейтинг: 5/5<br>👥 Вместимость: 2`,btn:"Забронировать",waText:"I want to reserve Room 702"},
+    tr:{dir:"ltr",title:"🏨 Oda 702 — Horizon Suite",desc:`✨ Geniş manzaralı Horizon süit<br>🛏 King Size yatak<br>📶 Yüksek hızlı internet<br>📺 Smart TV<br>🍷 Mini bar<br>🚿 Cam banyo<br>⭐ Puan: 5/5<br>👥 Kapasite: 2`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 702"}
+  },
+
+  "703": {
+    fa:{dir:"rtl",title:"🏨 اتاق 703 — VIP Deluxe",desc:`🌆 نمای باز شهر<br>🛏 تخت King Size<br>📶 اینترنت پرسرعت<br>📺 Smart TV<br>☕ قهوه‌ساز<br>🚿 حمام مدرن<br>🔇 عایق صدا<br>⭐ امتیاز: 5/5<br>👥 ظرفیت: 2 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 703"},
+    en:{dir:"ltr",title:"🏨 Room 703 — VIP Deluxe",desc:`🌆 Wide city view<br>🛏 King Size bed<br>📶 High-speed internet<br>📺 Smart TV<br>☕ Coffee maker<br>🚿 Modern bathroom<br>🔇 Soundproofing<br>⭐ Rating: 5/5<br>👥 Capacity: 2`,btn:"Reserve Room",waText:"I want to reserve Room 703"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 703 — VIP Deluxe",desc:`🌆 إطلالة واسعة على المدينة<br>🛏 سرير كينغ<br>📶 إنترنت فائق السرعة<br>📺 Smart TV<br>☕ صانع القهوة<br>🚿 حمام حديث<br>🔇 عزل صوتي<br>⭐ تقييم: 5/5<br>👥 السعة: 2`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 703"},
+    zh:{dir:"ltr",title:"🏨 703号房 — VIP Deluxe",desc:`🌆 宽阔城市景观<br>🛏 特大床<br>📶 高速网络<br>📺 智能电视<br>☕ 咖啡机<br>🚿 现代浴室<br>🔇 隔音<br>⭐ 评分: 5/5<br>👥 容量: 2`,btn:"预订房间",waText:"I want to reserve Room 703"},
+    ru:{dir:"ltr",title:"🏨 Номер 703 — VIP Deluxe",desc:`🌆 Широкий вид на город<br>🛏 Кровать king-size<br>📶 Высокоскоростной интернет<br>📺 Smart TV<br>☕ Кофеварка<br>🚿 Современная ванная<br>🔇 Звукоизоляция<br>⭐ Рейтинг: 5/5<br>👥 Вместимость: 2`,btn:"Забронировать",waText:"I want to reserve Room 703"},
+    tr:{dir:"ltr",title:"🏨 Oda 703 — VIP Deluxe",desc:`🌆 Geniş şehir manzarası<br>🛏 King Size yatak<br>📶 Yüksek hızlı internet<br>📺 Smart TV<br>☕ Kahve makinesi<br>🚿 Modern banyo<br>🔇 Ses yalıtımı<br>⭐ Puan: 5/5<br>👥 Kapasite: 2`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 703"}
+  },
+
+  "704": {
+    fa:{dir:"rtl",title:"🏨 اتاق 704 — VIP Luxury Room",desc:`✨ اقامت لوکس طبقه هفتم<br><br>🌇 چشم‌انداز شهر<br>🛌 تخت King Size VIP<br>❄️ تهویه هوشمند<br>📶 WiFi رایگان<br>📺 Smart TV<br>🧴 مینی بار<br>☕ چای و قهوه ساز<br>💼 میز کار<br>🔐 صندوق امانات<br><br>🚿 حمام شیشه‌ای مدرن<br>🧼 لوازم بهداشتی لوکس<br>🧻 حوله هتلی<br>💨 سشوار<br><br>💎 آرامش کامل<br>💎 نور عالی<br>💎 مناسب اقامت VIP<br><br>⭐ امتیاز مهمانان: 5/5<br>👥 ظرفیت: 3 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 704"},
+    en:{dir:"ltr",title:"🏨 Room 704 — VIP Luxury Room",desc:`✨ Luxury stay on the 7th floor<br><br>🌇 City view<br>🛌 King Size VIP bed<br>❄️ Smart climate control<br>📶 Free WiFi<br>📺 Smart TV<br>🧴 Mini bar<br>☕ Tea & coffee maker<br>💼 Work desk<br>🔐 Safe deposit box<br><br>🚿 Glass modern bathroom<br>🧼 Luxury toiletries<br>🧻 Hotel towels<br>💨 Hairdryer<br><br>💎 Complete tranquility<br>💎 Great lighting<br>💎 Ideal for VIP stays<br><br>⭐ Guest rating: 5/5<br>👥 Capacity: 3`,btn:"Reserve Room",waText:"I want to reserve Room 704"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 704 — VIP Luxury Room",desc:`✨ إقامة فاخرة في الطابق السابع<br><br>🌇 إطلالة على المدينة<br>🛌 سرير King Size VIP<br>❄️ تحكم مناخي ذكي<br>📶 واي فاي مجاني<br>📺 Smart TV<br>🧴 ميني بار<br>☕ صانع الشاي والقهوة<br>💼 مكتب عمل<br>🔐 خزنة<br><br>🚿 حمام زجاجي حديث<br>🧼 مستلزمات فاخرة<br>🧻 مناشف الفندق<br>💨 مجفف شعر<br><br>💎 هدوء تام<br>💎 إضاءة ممتازة<br>💎 مناسب للإقامة VIP<br><br>⭐ تقييم الضيوف: 5/5<br>👥 السعة: 3`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 704"},
+    zh:{dir:"ltr",title:"🏨 704号房 — VIP Luxury Room",desc:`✨ 七楼豪华住宿<br><br>🌇 城市景观<br>🛌 VIP特大床<br>❄️ 智能空调<br>📶 免费WiFi<br>📺 智能电视<br>🧴 迷你吧<br>☕ 茶与咖啡机<br>💼 办公桌<br>🔐 保险箱<br><br>🚿 玻璃现代浴室<br>🧼 豪华洗漱用品<br>🧻 酒店毛巾<br>💨 吹风机<br><br>💎 完全宁静<br>💎 优秀采光<br>💎 适合VIP入住<br><br>⭐ 客人评分: 5/5<br>👥 容量: 3`,btn:"预订房间",waText:"I want to reserve Room 704"},
+    ru:{dir:"ltr",title:"🏨 Номер 704 — VIP Luxury Room",desc:`✨ Роскошное проживание на 7 этаже<br><br>🌇 Вид на город<br>🛌 Кровать king-size VIP<br>❄️ Умный климат-контроль<br>📶 Бесплатный WiFi<br>📺 Smart TV<br>🧴 Мини-бар<br>☕ Чай/кофе<br>💼 Рабочий стол<br>🔐 Сейф<br><br>🚿 Современная стеклянная ванная<br>🧼 Роскошные туалетные принадлежности<br>🧻 Полотенца отеля<br>💨 Фен<br><br>💎 Полный покой<br>💎 Отличное освещение<br>💎 Подходит для VIP-проживания<br><br>⭐ Рейтинг гостей: 5/5<br>👥 Вместимость: 3`,btn:"Забронировать",waText:"I want to reserve Room 704"},
+    tr:{dir:"ltr",title:"🏨 Oda 704 — VIP Luxury Room",desc:`✨ Yedinci katta lüks konaklama<br><br>🌇 Şehir manzarası<br>🛌 VIP King Size yatak<br>❄️ Akıllı iklim kontrolü<br>📶 Ücretsiz WiFi<br>📺 Smart TV<br>🧴 Mini bar<br>☕ Çay ve kahve makinesi<br>💼 Çalışma masası<br>🔐 Kasa<br><br>🚿 Cam modern banyo<br>🧼 Lüks banyo ürünleri<br>🧻 Otel havluları<br>💨 Saç kurutma makinesi<br><br>💎 Tam huzur<br>💎 Harika aydınlatma<br>💎 VIP konaklama için ideal<br><br>⭐ Misafir puanı: 5/5<br>👥 Kapasite: 3`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 704"}
+  },
+
+  "705": {
+    fa:{dir:"rtl",title:"🏨 اتاق 705 — Royal Suite 👑",desc:`👑 سوئیت رویال<br>🌇 بهترین ویو هتل<br>🛏 تخت King Size لوکس<br>🍳 آشپزخانه کامل<br>🛋 نشیمن مجزا<br>📺 Smart TV بزرگ<br>📶 اینترنت پرسرعت<br>🚿 حمام VIP<br>⭐ امتیاز: 5/5<br>👥 ظرفیت: 4 نفر`,btn:"رزرو این اتاق",waText:"رزرو اتاق 705"},
+    en:{dir:"ltr",title:"🏨 Room 705 — Royal Suite",desc:`👑 Royal suite<br>🌇 Best hotel view<br>🛏 Luxurious King Size bed<br>🍳 Full kitchen<br>🛋 Separate living area<br>📺 Large Smart TV<br>📶 High-speed internet<br>🚿 VIP bathroom<br>⭐ Rating: 5/5<br>👥 Capacity: 4`,btn:"Reserve Room",waText:"I want to reserve Room 705"},
+    ar:{dir:"rtl",title:"🏨 الغرفة 705 — Royal Suite",desc:`👑 جناح رويال<br>🌇 أفضل إطلالة في الفندق<br>🛏 سرير كينغ فاخر<br>🍳 مطبخ كامل<br>🛋 غرفة جلوس منفصلة<br>📺 تلفاز ذكي كبير<br>📶 إنترنت فائق السرعة<br>🚿 حمام VIP<br>⭐ تقييم: 5/5<br>👥 السعة: 4`,btn:"احجز الغرفة",waText:"أريد حجز الغرفة 705"},
+    zh:{dir:"ltr",title:"🏨 705号房 — Royal Suite",desc:`👑 皇家套房<br>🌇 酒店最佳景观<br>🛏 豪华特大床<br>🍳 完整厨房<br>🛋 独立客厅<br>📺 大型智能电视<br>📶 高速网络<br>🚿 VIP浴室<br>⭐ 评分: 5/5<br>👥 容量: 4`,btn:"预订房间",waText:"I want to reserve Room 705"},
+    ru:{dir:"ltr",title:"🏨 Номер 705 — Royal Suite",desc:`👑 Королевский люкс<br>🌇 Лучший вид в отеле<br>🛏 Роскошная кровать king-size<br>🍳 Полная кухня<br>🛋 Отдельная гостиная<br>📺 Большой Smart TV<br>📶 Высокоскоростной интернет<br>🚿 VIP-ванная<br>⭐ Рейтинг: 5/5<br>👥 Вместимость: 4`,btn:"Забронировать",waText:"I want to reserve Room 705"},
+    tr:{dir:"ltr",title:"🏨 Oda 705 — Royal Suite",desc:`👑 Royal süit<br>🌇 Otelin en iyi manzarası<br>🛏 Lüks King Size yatak<br>🍳 Tam mutfak<br>🛋 Ayrı oturma alanı<br>📺 Büyük Smart TV<br>📶 Yüksek hızlı internet<br>🚿 VIP banyo<br>⭐ Puan: 5/5<br>👥 Kapasite: 4`,btn:"Odayı Rezerve Et",waText:"I want to reserve Room 705"}
+  }
+}; /* end roomsData */
+
+const WA_NUMBER = "905464658083";
+const defaultLang = "fa";
+const roomLangState = {};
+
+function el(id){ return document.getElementById(id); }
+
+function initRoom(roomNumber, dataObj){
+  const boxEl = el(`box-${roomNumber}`);
+  const titleEl = el(`title-${roomNumber}`);
+  const descEl = el(`desc-${roomNumber}`);
+  const reserveBtnEl = el(`reserve-${roomNumber}`);
+
+  if(!boxEl || !titleEl || !descEl || !reserveBtnEl) return;
+
+  roomLangState[roomNumber] = defaultLang;
+
+  function setLang(l){
+    const langData = dataObj[l] || dataObj[defaultLang];
+    roomLangState[roomNumber] = l;
+    boxEl.style.direction = langData.dir || "rtl";
+    boxEl.style.textAlign = (langData.dir === "rtl") ? "right" : "left";
+    titleEl.innerHTML = langData.title || "";
+    descEl.innerHTML = langData.desc || "";
+    reserveBtnEl.innerText = langData.btn || "";
+  }
+
+  function reserveRoom(){
+    const current = roomLangState[roomNumber] || defaultLang;
+    const langData = dataObj[current] || dataObj[defaultLang];
+    const waText = langData.waText || langData.title || `Reserve Room ${roomNumber}`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waText)}`, "_blank");
+  }
+
+  // Expose required global functions
+  const setName = `setLang${roomNumber}`;
+  const reserveName = `reserveRoom${roomNumber}`;
+
+  if(typeof window[setName] !== "function"){
+    window[setName] = setLang;
+  } else {
+    // wrap existing
+    const prev = window[setName];
+    window[setName] = function(lang){ setLang(lang); try{ prev(lang); }catch(e){} };
+  }
+
+  if(typeof window[reserveName] !== "function"){
+    window[reserveName] = reserveRoom;
+  } else {
+    const prevR = window[reserveName];
+    window[reserveName] = function(){ reserveRoom(); try{ prevR(); }catch(e){} };
+  }
+
+  // Attach language buttons
+  document.querySelectorAll(`button[data-room="${roomNumber}"]`).forEach(btn=>{
+    btn.addEventListener("click", function(){ setLang(this.dataset.lang); });
+  });
+
+  // Attach reserve button
+  reserveBtnEl.addEventListener("click", reserveRoom);
+
+  // Initialize default language
+  setLang(defaultLang);
+}
+
+/* Initialize all rooms present in roomsData */
+Object.keys(roomsData).forEach(roomNum => {
+  initRoom(roomNum, roomsData[roomNum]);
+});
+
+/* Optional: close lightbox when clicking outside card */
+document.querySelectorAll('.lightbox').forEach(lb=>{
+  lb.addEventListener('click', function(e){
+    if(e.target === this){
+      window.location.hash = '';
+    }
+  });
+});
+function toggleMenu(){
+  document.getElementById("contactMenu").classList.toggle("show");
+}
+
+</script>
 
 </body>
 </html>
+```
